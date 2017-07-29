@@ -17,6 +17,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let navBGImg: UIImage = UIImage(named: "bg.jpg")!
+        UINavigationBar.appearance().setBackgroundImage(navBGImg, for: .default)
+
+        //let myColor = UIColor(red: 250/255, green: 59/255, blue: 227/255, alpha:1)
+        let myColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha:1)
+
+        let textAttributes = [NSForegroundColorAttributeName:myColor]
+        UINavigationBar.appearance().titleTextAttributes = textAttributes
+        
+        
         return true
     }
 
@@ -90,4 +101,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 }
+
+let ad = UIApplication.shared.delegate as! AppDelegate
+let context = ad.persistentContainer.viewContext
+
+
+
+
+
+
+
 
