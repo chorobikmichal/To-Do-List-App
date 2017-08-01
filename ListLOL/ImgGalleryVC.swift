@@ -16,9 +16,11 @@ class ImgGalleryVC: UIViewController, UICollectionViewDataSource, UICollectionVi
     
     let array:[String] = ["abc","bg","imagePick","bg","abc","imagePick","abc","imagePick","bg"]
     
-    
+    var itemEdit: Item?
+    var item: Item!
+
     //here i retrive the image choosen in the func above and assign it to the imgg var created below
-    var imgg: UIImage! = UIImage(named: "abc.jpg")
+    var img: UIImage! = UIImage(named: "abc.jpg")
     
     
     override func viewDidLoad() {
@@ -28,6 +30,10 @@ class ImgGalleryVC: UIViewController, UICollectionViewDataSource, UICollectionVi
         collection.delegate = self
         imagePicker = UIImagePickerController()
         imagePicker.delegate = self
+        
+        if(itemEdit != nil){
+            itemEdit?.image1 = UIImage(named: "imagePick.jpg")
+        }
         
         //the back button is just an arro without any text beside it
         if let topItem = self.navigationController?.navigationBar.topItem {
@@ -45,7 +51,13 @@ class ImgGalleryVC: UIViewController, UICollectionViewDataSource, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? GalleryCell{
-            cell.thumbImg.image = UIImage(named: array[indexPath.row] + ".jpg")
+            
+            if(indexPath.row == array.count - 1){
+                cell.thumbImg.image = UIImage(named: "add.jpg")
+            }else{
+                cell.thumbImg.image = UIImage(named: array[indexPath.row] + ".jpg")
+            }
+            
             return cell
         }else{
             return UICollectionViewCell()
@@ -59,21 +71,32 @@ class ImgGalleryVC: UIViewController, UICollectionViewDataSource, UICollectionVi
     //when selected we are presented the iphone photo gallery picker
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        present(imagePicker, animated: true, completion: nil)
+        if(indexPath.row == array.count - 1){
+            present(imagePicker, animated: true, completion: nil)
+        }else{
+            item = itemEdit
+            item.image1 = UIImage(named: array[indexPath.row] + ".jpg")
+            ad.saveContext()
+            _ = navigationController?.popViewController(animated: true)
+        }
         
     }
-    
 
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]){
         if let img = info[UIImagePickerControllerOriginalImage] as? UIImage{
-            imgg = img
+            
+            item = itemEdit
+            item.image1 = img
+            ad.saveContext()
+            
             imagePicker.dismiss(animated: true, completion: nil)
             print("1111111111")
         }
         print("2222222222")
         
         //performSegue(withIdentifier: "ItemsDetailsVC", sender: self)
+        
         _ = navigationController?.popViewController(animated: false)
 
     }

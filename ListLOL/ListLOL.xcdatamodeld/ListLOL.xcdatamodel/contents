@@ -10,10 +10,10 @@
     </entity>
     <entity name="ItemType" representedClassName="ItemType" syncable="YES">
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="toItem" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Item" inverseName="toItemType" inverseEntity="Item" syncable="YES"/>
+        <relationship name="toItem" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="toItemType" inverseEntity="Item" syncable="YES"/>
     </entity>
     <elements>
         <element name="Item" positionX="-18" positionY="27" width="128" height="133"/>
-        <element name="ItemType" positionX="268" positionY="63" width="128" height="73"/>
+        <element name="ItemType" positionX="268" positionY="63" width="128" height="75"/>
     </elements>
 </model>

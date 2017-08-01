@@ -25,4 +25,6 @@ class GalleryCell: UICollectionViewCell{
         thumbImg.image = UIImage(named: x)
     }
     
+    
+    
 }

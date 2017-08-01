@@ -39,11 +39,47 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+
         let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ItemCell
         configureCell(cell: cell, indexPath: indexPath as NSIndexPath)
         
+        /***set tag for the cell button to the same as the indexpath of the cell***/
+        cell.checkBox.tag = indexPath.row
+        cell.checkBox.addTarget(self, action: #selector(CheckAction), for: .touchUpInside)
+        
         return cell
     }
+    
+    
+    
+    func CheckAction (sender: UIButton){
+        
+        //these lines determine the indexpath of the cell where the button was clicked
+        let pointTable: CGPoint = sender.convert(sender.bounds.origin, to: self.tableView)
+        let cellIndexPath = self.tableView.indexPathForRow(at: pointTable)
+        
+        //here we get the selected cells items core data and switch the image in the button to checked or unchecked
+        if let objs = controller.fetchedObjects , objs.count > 0 {
+            let item = objs[(cellIndexPath?.row)!]
+            
+            if (item.image2 == UIImage(named: "unchecked.jpg")){
+                item.image2 = UIImage(named: "checked.jpg")
+            } else {
+                item.image2 = UIImage(named: "unchecked.jpg")
+            }
+            //the saves the core data
+            ad.saveContext()
+        }
+        
+        //performSegue(withIdentifier: "ItemsDetailsVC", sender: myCell)
+        
+        print("itssss ---->  \(cellIndexPath)")
+        
+        //this refreshes the table so the change of the button image can be observed right away
+        tableView.reloadData()
+        
+    }
+    
     
     func configureCell(cell: ItemCell, indexPath: NSIndexPath){
         
@@ -52,10 +88,13 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
     }
     
     
-    
+    var itemForChange: Item?
     
     //any time someone selects an element in the table view I check for if its not empty
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        //tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCellAccessoryType.checkmark
+        
         
         //comma means "where"
         if let objs = controller.fetchedObjects , objs.count > 0 {
@@ -67,8 +106,9 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ItemsDetailsVC"{
             if let destination = segue.destination as? ItemsDetailsVC{
+                
                 if let item = sender as? Item {
-                    destination.itemToEdit = item
+                        destination.itemToEdit = item
                 }
             }
         }
@@ -108,7 +148,21 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
         
         //sort the items by date
         let dateSort = NSSortDescriptor(key: "created", ascending: false)
+
+        //checks which segment is selected (index 0 is the default)
+        if segment.selectedSegmentIndex == 0 {
+            fetchRequest.predicate = NSPredicate(format: "toItemType.type = %@", "today")
+        } else if segment.selectedSegmentIndex == 1 {
+            fetchRequest.predicate = NSPredicate(format: "toItemType.type = %@", "this week")
+        } else if segment.selectedSegmentIndex == 2 {
+            fetchRequest.predicate = NSPredicate(format: "toItemType.type = %@", "this month")
+        } else if segment.selectedSegmentIndex == 3 {
+            fetchRequest.predicate = NSPredicate(format: "toItemType.type = %@", "this year")
+        }
+
         fetchRequest.sortDescriptors = [dateSort]
+        //fetchRequest.fetchLimit = 2
+        
         
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
         
@@ -124,6 +178,15 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
         }
         
     }
+    
+    //segmented controll action outlet
+    @IBAction func segmentChange(_ sender: Any) {
+        
+        attemptFetch()
+        tableView.reloadData()
+        
+    }
+    
     
     //will listen for any chnges and update core data
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -169,9 +232,9 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
         }
     }
     
-    /**************************************************************************************************/
     
 }
+
 
 func generateTestData(){
     
