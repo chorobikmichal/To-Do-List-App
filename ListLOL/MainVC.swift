@@ -10,7 +10,6 @@ import UIKit
 import CoreData
 
 class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
-
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segment: UISegmentedControl!
@@ -24,8 +23,11 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
         tableView.delegate = self
         tableView.dataSource = self
         
-        //generateTestData()
         attemptFetch()
+        
+        //another waeditBtnPressed to set up a button action outlet. with different benefits
+        let leftBtn = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.plain, target: self, action: #selector(editBtnPressed))
+        self.navigationItem.leftBarButtonItem = leftBtn
         
     }
 
@@ -46,7 +48,8 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
         /***set tag for the cell button to the same as the indexpath of the cell***/
         cell.checkBox.tag = indexPath.row
         cell.checkBox.addTarget(self, action: #selector(CheckAction), for: .touchUpInside)
-        
+        //its sopose t obe 230 for rgb but it ends up showing up as 224
+        cell.backgroundColor = UIColor(red: 236, green: 236, blue: 236)
         return cell
     }
     
@@ -70,8 +73,6 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
             //the saves the core data
             ad.saveContext()
         }
-        
-        //performSegue(withIdentifier: "ItemsDetailsVC", sender: myCell)
         
         print("itssss ---->  \(cellIndexPath)")
         
@@ -143,11 +144,12 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
 
     func attemptFetch(){
         
+        
         //fetches the items from core data
         let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
         
         //sort the items by date
-        let dateSort = NSSortDescriptor(key: "created", ascending: false)
+        let posSort = NSSortDescriptor(key: "position", ascending: true)
 
         //checks which segment is selected (index 0 is the default)
         if segment.selectedSegmentIndex == 0 {
@@ -160,11 +162,12 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
             fetchRequest.predicate = NSPredicate(format: "toItemType.type = %@", "this year")
         }
 
-        fetchRequest.sortDescriptors = [dateSort]
+        fetchRequest.sortDescriptors = [posSort]
         //fetchRequest.fetchLimit = 2
         
         
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        
         
         controller.delegate = self
         //self.controller is the controller inside this func and it is assigned the val of the outside contoller
@@ -176,6 +179,8 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
             let error = error as NSError
             print("\(error)")
         }
+        
+
         
     }
     
@@ -231,22 +236,61 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
             break
         }
     }
+    //Allow for reordering of cells
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        
+        
+        var objects = controller.fetchedObjects!
+        
+        let obj = objects[sourceIndexPath.row]
+        objects.remove(at: sourceIndexPath.item)
+        objects.insert(obj, at: destinationIndexPath.item)
+                
+        var i = 0
+        for obj in objects {
+            obj.position = Int32(i) as NSNumber?
+            i += 1
+        }
+        
+        ad.saveContext()
+        tableView.reloadData()
+    }
+    func editBtnPressed(sender: UIBarButtonItem) {
+        
+        
+        if self.tableView.isEditing == true {
+            self.tableView.isEditing = false
+            self.navigationItem.leftBarButtonItem?.title = "Edit"
+        } else {
+            self.tableView.isEditing = true
+            self.navigationItem.leftBarButtonItem?.title = "Done"
+        }
+
+    }
+    //turns on editing mode
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(isEditing, animated: true)
+    }
     
-    
+    //these two func get rid of the default delete button that appears when in the editting mode
+    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return .none
+    }
+    //5 Lines of code send to me by GOD!!!!!!
+    //tells me when this controller is being currentlly viewed so that i can refresh it
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //print("VC appears")
+        attemptFetch()
+        tableView.reloadData()
+        ad.saveContext()
+    }
 }
 
-
-func generateTestData(){
-    
-    let item1 = Item(context: context)
-    item1.title = "chillax man u deserve it!"
-    
-    let item2 = Item(context: context)
-    item2.title = "Dont forget to rest"
-    
-    let item3 = Item(context: context)
-    item3.title = "have some great food and stay highdrated as always"
-    
-    ad.saveContext()
-}
 

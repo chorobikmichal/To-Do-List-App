@@ -114,7 +114,7 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="aFf-ca-tij" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="1y5-pE-E7e"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="99X-5D-NMz" secondAttribute="bottom" id="4iM-9A-U6k"/>
@@ -129,6 +129,7 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <navigationItem key="navigationItem" title="To Do List" id="nC7-c8-YyB">
+                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="HQZ-Od-gav"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Wh3-bu-PkJ">
                             <connections>
                                 <segue destination="flh-10-bsv" kind="show" identifier="ItemsDetailsVCNew" id="PZQ-1b-d3Z"/>
@@ -157,14 +158,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imagePick" translatesAutoresizingMaskIntoConstraints="NO" id="SUU-Eq-rrH">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default2" translatesAutoresizingMaskIntoConstraints="NO" id="SUU-Eq-rrH">
                                 <rect key="frame" x="16" y="72" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="CDi-Fm-WEL"/>
                                     <constraint firstAttribute="width" constant="100" id="ofs-A8-t3F"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QZe-Dh-fDe">
+                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QZe-Dh-fDe">
                                 <rect key="frame" x="16" y="72" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="ZhF-FE-AiH"/>
@@ -219,7 +220,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="PYY-Dy-dnC" firstAttribute="top" secondItem="fnl-hT-omw" secondAttribute="bottom" constant="8" id="5VW-k7-SvG"/>
                             <constraint firstItem="SUU-Eq-rrH" firstAttribute="leading" secondItem="ttG-Jn-ZVC" secondAttribute="leadingMargin" id="5aD-gU-ZH7"/>
@@ -285,7 +286,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="abc" translatesAutoresizingMaskIntoConstraints="NO" id="Sye-MB-dAa">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="abc" translatesAutoresizingMaskIntoConstraints="NO" id="Sye-MB-dAa">
                                                     <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
                                                 </imageView>
                                             </subviews>
@@ -350,7 +351,7 @@
     </scenes>
     <resources>
         <image name="abc" width="200" height="200"/>
-        <image name="imagePick" width="300" height="300"/>
+        <image name="default2" width="1600" height="1200"/>
         <image name="unchecked" width="300" height="300"/>
     </resources>
     <inferredMetricsTieBreakers>

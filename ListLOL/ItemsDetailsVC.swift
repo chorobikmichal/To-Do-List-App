@@ -38,21 +38,13 @@ class ItemsDetailsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         categoryPicker.delegate = self
         categoryPicker.dataSource = self
         
-        /*let category1 = ItemType(context: context)
-        category1.type = "today"
+        getPickerOptions()
         
-        let category2 = ItemType(context: context)
-        category2.type = "this week"
-        
-        let category3 = ItemType(context: context)
-        category3.type = "this month"
-        
-        let category4 = ItemType(context: context)
-        category4.type = "this year"
+        //these reorder the picker view so that it is [today,this week, this month, this year]
+        swap(&categories[1],&categories[3])
+        swap(&categories[0],&categories[2])
+        swap(&categories[1],&categories[2])
 
-        ad.saveContext()*/
-        getStores()
-        
         if itemToEdit != nil{
             //means we are editing an item and call a func i made
             loadItemData()
@@ -104,7 +96,7 @@ class ItemsDetailsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         //update when selected
     }
     
-    func getStores(){
+    func getPickerOptions(){
         let fetchRequest: NSFetchRequest<ItemType> = ItemType.fetchRequest()
         
         do{
@@ -121,7 +113,7 @@ class ItemsDetailsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         
         if itemToEdit == nil && newItem == nil {
             newItem = Item(context: context)
-            newImg.image = UIImage(named: "imagePick.jpg")
+            newImg.image = UIImage(named: "default1.jpg")
             newItem.image1 = newImg.image
             newItem.image2 = UIImage(named: "unchecked.jpg")
             
@@ -140,6 +132,8 @@ class ItemsDetailsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         //we only have one column in the picker so that why ""categoryPicker.selectedRow(inComponent: 0)"" says 0
         newItem.toItemType = categories[categoryPicker.selectedRow(inComponent: 0)]
         
+        newItem.position = 9999
+        
         ad.saveContext()
         
         //go back to previous screen
@@ -153,7 +147,7 @@ class ItemsDetailsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             performSegue(withIdentifier: "galleryVC", sender: itemToEdit)
         } else if itemToEdit == nil {
             newItem = Item(context: context)
-            newItem.image1 = UIImage(named: "imagePick.jpg")
+            newItem.image1 = UIImage(named: "default1.jpg")
             newItem.image2 = UIImage(named: "unchecked.jpg")
 
             performSegue(withIdentifier: "galleryVC", sender: newItem)
@@ -226,8 +220,20 @@ class ItemsDetailsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     //tells me when this controller is being currentlly viewed so that i can refresh it
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-            print("!!!!!111!!!!!!!")
+            //print("VC appears")
             reloadThumbImg()
     }
     
+    //text field character limit
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+
+        let charCount = titleField.text?.characters.count ?? 0
+        if (range.length + range.location > charCount){
+            return false
+        }
+        
+        let newLength = charCount + string.characters.count - range.length
+        return newLength <= 38
+        
+    }
 }

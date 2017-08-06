@@ -14,7 +14,7 @@ class ImgGalleryVC: UIViewController, UICollectionViewDataSource, UICollectionVi
     
     var imagePicker: UIImagePickerController!
     
-    let array:[String] = ["abc","bg","imagePick","bg","abc","imagePick","abc","imagePick","bg"]
+    let array:[String] = ["abc","1","2","3","4","6","7","11","12","13","14"]
     
     var itemEdit: Item?
     var item: Item!
@@ -32,7 +32,7 @@ class ImgGalleryVC: UIViewController, UICollectionViewDataSource, UICollectionVi
         imagePicker.delegate = self
         
         if(itemEdit != nil){
-            itemEdit?.image1 = UIImage(named: "imagePick.jpg")
+            itemEdit?.image1 = UIImage(named: "default1.jpg")
         }
         
         //the back button is just an arro without any text beside it
@@ -53,7 +53,7 @@ class ImgGalleryVC: UIViewController, UICollectionViewDataSource, UICollectionVi
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? GalleryCell{
             
             if(indexPath.row == array.count - 1){
-                cell.thumbImg.image = UIImage(named: "add.jpg")
+                cell.thumbImg.image = UIImage(named: "add-square3.jpg")
             }else{
                 cell.thumbImg.image = UIImage(named: array[indexPath.row] + ".jpg")
             }
@@ -91,9 +91,7 @@ class ImgGalleryVC: UIViewController, UICollectionViewDataSource, UICollectionVi
             ad.saveContext()
             
             imagePicker.dismiss(animated: true, completion: nil)
-            print("1111111111")
         }
-        print("2222222222")
         
         //performSegue(withIdentifier: "ItemsDetailsVC", sender: self)
         

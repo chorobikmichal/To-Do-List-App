@@ -16,6 +16,7 @@ extension Item {
         return NSFetchRequest<Item>(entityName: "Item");
     }
 
+    @NSManaged public var position: NSNumber?
     @NSManaged public var details: String?
     @NSManaged public var title: String?
     @NSManaged public var image1: NSObject?
