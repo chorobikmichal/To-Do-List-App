@@ -40,10 +40,31 @@ class ItemsDetailsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         
         getPickerOptions()
         
+        
+        print("count is \(categories.count)")
+        
+        if(categories.count == 0 ){
+            
+            let category1 = ItemType(context: context)
+            category1.type = "today"
+            
+            let category2 = ItemType(context: context)
+            category2.type = "this week"
+            
+            let category3 = ItemType(context: context)
+            category3.type = "this month"
+            
+            let category4 = ItemType(context: context)
+            category4.type = "this year"
+            
+            ad.saveContext()
+            getPickerOptions()
+            
+        }
+        
         //these reorder the picker view so that it is [today,this week, this month, this year]
+        swap(&categories[0],&categories[1])
         swap(&categories[1],&categories[3])
-        swap(&categories[0],&categories[2])
-        swap(&categories[1],&categories[2])
 
         if itemToEdit != nil{
             //means we are editing an item and call a func i made
