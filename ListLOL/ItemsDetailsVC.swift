@@ -63,8 +63,8 @@ class ItemsDetailsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         }
         
         //these reorder the picker view so that it is [today,this week, this month, this year]
-        swap(&categories[0],&categories[3])
-        swap(&categories[1],&categories[2])
+        //swap(&categories[0],&categories[3])
+        //swap(&categories[1],&categories[2])
 
         if itemToEdit != nil{
             //means we are editing an item and call a func i made
