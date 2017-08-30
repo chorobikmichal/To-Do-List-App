@@ -32,7 +32,7 @@ class ImgGalleryVC: UIViewController, UICollectionViewDataSource, UICollectionVi
         imagePicker.delegate = self
         
         if(itemEdit != nil){
-            itemEdit?.image1 = UIImage(named: "default1.jpg")
+            itemEdit?.image1 = UIImage(named: "default2.jpg")
         }
         
         //the back button is just an arro without any text beside it
@@ -110,7 +110,9 @@ class ImgGalleryVC: UIViewController, UICollectionViewDataSource, UICollectionVi
         
         return CGSize(width: 65, height: 65)
     }
-    
-
+    //status bar is hidden
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
 
 }

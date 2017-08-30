@@ -63,8 +63,8 @@ class ItemsDetailsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         }
         
         //these reorder the picker view so that it is [today,this week, this month, this year]
-        swap(&categories[0],&categories[1])
-        swap(&categories[1],&categories[3])
+        swap(&categories[0],&categories[3])
+        swap(&categories[1],&categories[2])
 
         if itemToEdit != nil{
             //means we are editing an item and call a func i made
@@ -134,7 +134,7 @@ class ItemsDetailsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         
         if itemToEdit == nil && newItem == nil {
             newItem = Item(context: context)
-            newImg.image = UIImage(named: "default1.jpg")
+            newImg.image = UIImage(named: "default2.jpg")
             newItem.image1 = newImg.image
             newItem.image2 = UIImage(named: "unchecked.jpg")
             
@@ -168,7 +168,7 @@ class ItemsDetailsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             performSegue(withIdentifier: "galleryVC", sender: itemToEdit)
         } else if itemToEdit == nil {
             newItem = Item(context: context)
-            newItem.image1 = UIImage(named: "default1.jpg")
+            newItem.image1 = UIImage(named: "default2.jpg")
             newItem.image2 = UIImage(named: "unchecked.jpg")
 
             performSegue(withIdentifier: "galleryVC", sender: newItem)
@@ -256,5 +256,9 @@ class ItemsDetailsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         let newLength = charCount + string.characters.count - range.length
         return newLength <= 38
         
+    }
+    //status bar is hidden
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
 }

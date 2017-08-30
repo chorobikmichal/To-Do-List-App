@@ -291,6 +291,11 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
         tableView.reloadData()
         ad.saveContext()
     }
+    
+    //status bar is hidden
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
 }
 
 
