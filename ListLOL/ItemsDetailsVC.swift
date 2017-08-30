@@ -212,7 +212,6 @@ class ItemsDetailsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         
     }
     
-    
     @IBAction func deletePressed(_ sender: Any) {
         
         if itemToEdit != nil {
