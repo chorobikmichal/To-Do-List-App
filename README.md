@@ -2,14 +2,13 @@
 
 ## Description
 
-The pourpouse of this app is to list the goals that you plan to complete.  
-Goals are organized by the time period of planned completion. 
+The To Do List app is meant for simple task management. The user is able to add tasks that they want to complete in a set time frame. Everything about each task can be edited including the time period for completion and the thumbnail picture. Goals are registered as completed when the check box on that Goal is ticked.
 Goals disappear from the list after being marked as completed or move over to that same period ahead if not completed. For example if you have a goal that you plan to complete today and at the end of the day that goal if not completed than that goal will move over to the next day giving you another day for competion. This is repeated untill the goal is completed.
 You can rearrange and edit the goals.
 Image for each goal can be set from the list of default images or uploaded from your phone. If no image is selected the default image will appear as the goal's image.
 Everything about each goal can be edited including the time period for completion and picture.
 Goals are registered as completed when the check box is ticked.
-All data is saved in core data.
+All user data is saved in core data.
 
 ## Limits
 Goal description has a 38 char limit
