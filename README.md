@@ -8,7 +8,7 @@ The To Do List app is meant for simple task management. The user is able to add 
 Goal description has a 38 char limit
 
 
-## Usage
+## Basic Usage
 
 The purpose of this app is to list the things that you plan to complete. Once they are completed you can mark the box located beside task. Once the task is marked as completed it will disappear
 
