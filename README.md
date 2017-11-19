@@ -10,7 +10,7 @@ Goal description has a 38 char limit
 
 ## Basic Usage
 
-The purpose of this app is to list the things that you plan to complete. Once they are completed you can mark the box located beside task. Once the task is marked as completed it will disappear
+The purpose of this app is to list the things that you plan to complete. Once they are completed you can mark the box located beside task. Once the task is marked as completed it will disappear at the end of that day
 
 ![bez nazwy-1](https://user-images.githubusercontent.com/24882037/29999438-ab589c34-9016-11e7-9092-52d74485d91a.jpg)
 ![bez nazwy-2](https://user-images.githubusercontent.com/24882037/29999437-ab588a50-9016-11e7-95bd-3095ab3ab8bb.jpg)
