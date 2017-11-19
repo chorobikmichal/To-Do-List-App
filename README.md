@@ -4,13 +4,9 @@
 
 The To Do List app is meant for simple task management. The user is able to add tasks that they want to complete in a set time frame. There are four possible time frames for completion today, this week, this month and this year. Everything about each task can be edited including the time period for completion and the thumbnail picture. Goals are registered as completed when the check box on that task is ticked. Once a goal is completed it disappears. If a goal is not completed in its time frame its time frame will automatically be extended by the same amount of time as it was previously given. The goals can be edited at any time and their order can be rearranged. All user data is saved in core data.
 
-## Limits
-Goal description has a 38 char limit
-
-
 ## Basic Usage
 
-The purpose of this app is to list the things that you plan to complete. Once they are completed you can mark the box located beside task. Once the task is marked as completed it will disappear at the end of that day
+The purpose of this app is to list the things that you plan to complete. Once they are completed you can mark the box located beside task. Once the task is marked as completed it will disappear at the end of that day.
 
 ![bez nazwy-1](https://user-images.githubusercontent.com/24882037/29999438-ab589c34-9016-11e7-9092-52d74485d91a.jpg)
 ![bez nazwy-2](https://user-images.githubusercontent.com/24882037/29999437-ab588a50-9016-11e7-95bd-3095ab3ab8bb.jpg)
@@ -40,7 +36,7 @@ Simply click on the cell that you want to edit. The example below shows the chan
 ![bez nazwy-12](https://user-images.githubusercontent.com/24882037/29999449-ab786fe6-9016-11e7-9755-3dcea0fc02f5.jpg)
 
 ## Deleting
-In order to delete a cell select it. Once selected you can delete it by clicking the delete button shown on the image below
+In order to delete a cell select it. Once selected you can delete it by clicking the delete button shown on the image below.
 
 ![bez nazwy-20](https://user-images.githubusercontent.com/24882037/29999528-35f0044c-901a-11e7-97d1-953008cbe26c.jpg)
 
