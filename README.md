@@ -16,7 +16,7 @@ The purpose of this app is to list the things that you plan to complete. Once th
 
 In order to add a new task click the add button shown on the image below. Once you are on the Add/Edit screen you can fill in all the information. When adding the image you can choose one of the images offered by the app or upload your own from your camera roll. An example of that can be seen in the example below.
 
-![adding2](https://user-images.githubusercontent.com/24882037/33634569-9d2e366c-d9e2-11e7-98fb-a69c18cc27dc.gif)
+![adding2](https://user-images.githubusercontent.com/24882037/33634569-9d2e366c-d9e2-11e7-98fb-a69c18cc27dc.gif) 
 ![adding](https://user-images.githubusercontent.com/24882037/33634571-9ef4982e-d9e2-11e7-87af-546980d9eb60.gif)
 
 ## Editing
